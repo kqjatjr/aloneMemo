@@ -28,12 +28,16 @@
       <button type="submit">저장하기</button>
     </form>
     <ul id="list"></ul>
+
     <script>
       function renderMemo() {
-        fetch("/api/memo")
-          .then((response) => response.json())
+        fetch("/api/memo") // 기본 매소드는 GET방식.
+          .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
           .then(({ memos }) => {
+            // @app.route('/api/memo', methods=['GET']) 구문의 결과로 나온 memos
             const list = document.querySelector("#list");
+            // 각 값을 map을 통해 list.inlineHTML에 적용시킵니다.
+            // { title, imgUrl, description, comment, url } 이놈들을~   => 이후 포맷으로 바꿔줍니다
             list.innerHTML = memos
               .map(
                 ({ title, imgUrl, description, comment, url }) => `
@@ -50,8 +54,9 @@
       }
 
       const $form = document.querySelector("#form");
+
       form.addEventListener("submit", function (e) {
-        e.preventDefault();
+        e.preventDefault(); //form의 기본 기능인 즉시 새로고침을 하지 못하게 하는 기능
         const url = form.querySelector(".form_url").value;
         const memo = form.querySelector(".form_memo").value;
         fetch("/api/memo", {
@@ -60,16 +65,20 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ url_give: url, comment_give: memo }),
+          // JSON.stringify() : 자바스크립트 값을 jSON문자열로 변환한다.
         })
           .then((response) => response.json())
           .then((result) => {
             if (result.Success) {
               alert("포스팅 성공");
               renderMemo();
+              // 포스팅을 할때마다 다시 랜더 함수를실행하여 바로바로 화면이 바뀌게 합니다.
             }
           })
           .catch((error) => {
+            // 기준이 되는 url의 사이트에서 내가 찾는 데이터가 없을경우
             alert("저장에 실패했습니다.");
+            // alert() : 브라우저 창에서 나오는 알림창 느낌
           });
       });
 

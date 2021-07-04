@@ -6,10 +6,14 @@ from flask.templating import render_template
 
 app = Flask(__name__)
 
+# 제일기본상태
+
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# 'fetch ('/api/memo'), {method: 'POST', ... })
 
 
 @app.route('/api/memo', methods=['POST'])
@@ -29,6 +33,10 @@ def postMemo():
     }
     createMemo(memo)
     return jsonify({"Success": True})
+    # jsonify() : 사용자가 json data를 내보내도록 제공하는 flask의 함수
+
+
+# 'fetch ('/api/memo')
 
 
 @app.route('/api/memo', methods=['GET'])
