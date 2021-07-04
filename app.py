@@ -4,6 +4,9 @@ from flask import Flask, request
 from flask.json import jsonify
 from flask.templating import render_template
 
+# pip freeze > requirements.txt : 새로 다운받은 모듈을 추가해줍니다.
+# pip install -r requirements.txt : requirements.txt내의 명시되어있는 모듈 전체를 다운로드 받습니다.
+
 app = Flask(__name__)
 
 # 제일기본상태
