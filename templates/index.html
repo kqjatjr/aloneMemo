@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나홀로 링크 메모장</title>
+  </head>
+  <body>
+    <form id="form">
+      <div>
+        url
+        <input
+          class="form_url"
+          name="url"
+          type="text"
+          placeholder="url을 입력하세요"
+        />
+      </div>
+      <div>
+        memo
+        <input
+          class="form_memo"
+          name="memo"
+          type="text"
+          placeholder="메모를 입력하세요"
+        />
+      </div>
+      <button type="submit">저장하기</button>
+    </form>
+    <ul id="list"></ul>
+    <script>
+      function renderMemo() {
+        fetch("/api/memo")
+          .then((response) => response.json())
+          .then(({ memos }) => {
+            const list = document.querySelector("#list");
+            list.innerHTML = memos
+              .map(
+                ({ title, imgUrl, description, comment, url }) => `
+            <li>
+                <img src="${imgUrl}" />
+                <a href="${url}">${title}</a>
+                <div>${description}</div>
+                <div>${comment}</div>
+            </li>
+            `,
+              )
+              .join("");
+          });
+      }
+
+      const $form = document.querySelector("#form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const url = form.querySelector(".form_url").value;
+        const memo = form.querySelector(".form_memo").value;
+        fetch("/api/memo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url_give: url, comment_give: memo }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.Success) {
+              alert("포스팅 성공");
+              renderMemo();
+            }
+          })
+          .catch((error) => {
+            alert("저장에 실패했습니다.");
+          });
+      });
+
+      renderMemo();
+    </script>
+  </body>
+</html>
