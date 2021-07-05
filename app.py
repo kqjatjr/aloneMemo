@@ -43,6 +43,7 @@ def postMemo():
 
 
 @app.route('/api/memo', methods=['GET'])
+# 데이터 베이스 상의 아이디 값을 뺀 모든 정보를 가져옵니다.
 def getMemo():
     memos = getMemos()
     return jsonify({"memos": memos})

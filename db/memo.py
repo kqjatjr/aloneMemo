@@ -15,5 +15,7 @@ def createMemo(memo):
 
 
 def getMemos():
+    # find({찾을조건}, {찾으며 원하지 않는 조건 : False})
+    # {} '_id' : False } : _id값은 빼고 가져옵니다.
     result = db.memo.find({}, {'_id': False})
     return list(result)

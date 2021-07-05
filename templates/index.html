@@ -3,9 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <style>
+       .wrap {
+                width: 900px;
+                margin: auto;
+            }
+    </style>
     <title>나홀로 링크 메모장</title>
   </head>
   <body>
+    <div class="wrap">
+      <div class="jumbotron">
+          <h1 class="display-4">ALONE MEMO</h1>
+          <p class="lead">기억해 두고싶은 링크를 저장해 두는 공간입니다.</p>
+          <hr class="my-4">
+          <p class="lead">
+          </p>
+      </div>
     <form id="form">
       <div>
         url
@@ -30,10 +50,24 @@
     <ul id="list"></ul>
 
     <script>
-      function renderMemo() {
-        fetch("/api/memo") // 기본 매소드는 GET방식.
+      function getMemo(){
+        return fetch("/api/memo") // 기본 매소드는 GET방식.
           .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
-          .then(({ memos }) => {
+      }
+
+      function postMemo(data) {
+        return etch('/api/memo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+          // JSON.stringify() : 자바스크립트 값을 jSON문자열로 변환한다.
+        }).then((response) => response.json());
+      }
+
+      function renderMemo() {
+          getMemo().then(({ memos }) => {
             // @app.route('/api/memo', methods=['GET']) 구문의 결과로 나온 memos
             const list = document.querySelector("#list");
             // 각 값을 map을 통해 list.inlineHTML에 적용시킵니다.
@@ -59,15 +93,7 @@
         e.preventDefault(); //form의 기본 기능인 즉시 새로고침을 하지 못하게 하는 기능
         const url = form.querySelector(".form_url").value;
         const memo = form.querySelector(".form_memo").value;
-        fetch("/api/memo", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url_give: url, comment_give: memo }),
-          // JSON.stringify() : 자바스크립트 값을 jSON문자열로 변환한다.
-        })
-          .then((response) => response.json())
+        postMemo({url_give : url, comment_give: memo})
           .then((result) => {
             if (result.Success) {
               alert("포스팅 성공");
