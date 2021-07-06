@@ -78,7 +78,7 @@
     </div>
 
     <div class="container">
-      <ul class="row rol-cols-4" id="list"></ul>
+      <ul class="card-columns" id="list"></ul>
     </div>
 
     <script>
@@ -118,7 +118,7 @@
             list.innerHTML = memos
               .map(
                 ({ title, imgUrl, description, comment, url }) => `
-            <li class="col-sm-4 aloneMemo_memo-item">
+            <li class="col-sm-4 aloneMemo_memo-item card">
               <div class="card">
                 <img class="card-img-top" src="${imgUrl}" />
                 <div class="card-body">
