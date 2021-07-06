@@ -83,6 +83,7 @@
           $post.style.display = 'none'
         }
       }
+
       function getMemo(){
         return fetch("/api/memo") // 기본 매소드는 GET방식.
           .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
@@ -128,11 +129,11 @@
 
       const $form = document.querySelector("#form");
 
-      $form.addEventListener("submit", function (e) {
+      form.addEventListener("submit", function (e) {
         e.preventDefault(); //form의 기본 기능인 즉시 새로고침을 하지 못하게 하는 기능
         const url = form.querySelector(".form_url").value;
         const memo = form.querySelector(".form_memo").value;
-        postMemo({url_give : url, comment_give: memo})
+        postMemo({ url_give : url, comment_give: memo })
           .then((result) => {
             if (result.Success) {
               alert("포스팅 성공");
