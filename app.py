@@ -10,6 +10,7 @@ from flask.templating import render_template
 app = Flask(__name__)
 
 # 제일기본상태
+# 서버가 실행되었을시에 제일 처음 실행됩니다.
 
 
 @app.route('/')
@@ -19,6 +20,8 @@ def home():
 # 'fetch ('/api/memo'), {method: 'POST', ... })
 
 
+#  title = soup.find('meta', property='og:title') : <meta>태그의 property='og:title' 가진 녀석을 가져옵니다.
+#  "title": title["content"] : title의 content부분을 가져옵니다.
 @app.route('/api/memo', methods=['POST'])
 def postMemo():
     url = request.json['url_give']
@@ -40,7 +43,7 @@ def postMemo():
 
 
 # 'fetch ('/api/memo')
-
+# 기본 매소느는 GET방식이기 때문에 생략해도 무방합니다.
 
 @app.route('/api/memo', methods=['GET'])
 # 데이터 베이스 상의 아이디 값을 뺀 모든 정보를 가져옵니다.

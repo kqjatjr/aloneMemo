@@ -55,12 +55,14 @@
         .catch((error) => {
           // 기준이 되는 url의 사이트에서 내가 찾는 데이터가 없을경우
           alert("저장에 실패했습니다.");
-          // alert() : 브라우저 창에서 나오는 알림창 느낌
+          // alert() : 브라우저 창에서 나오는 알림창
         });
     }
 
     togglePostBox = (value) => {
       const $post = document.querySelector("#post-box");
+      // 벨류의 값이 없으면 현제 스타일대로 갑니다.
+      // 밸류의 값이 있으면 value는 false가되어 else문으로 가게됩니다.
       const shouldToggle =
         value === undefined ? $post.style.display === "none" : value;
       if (shouldToggle) {
@@ -95,6 +97,6 @@
         .join("");
     }
   }
-
+  // 외부에 공개되는 것을 제한합니다.
   window.AloneMemo = AloneMemo;
 })(window);
