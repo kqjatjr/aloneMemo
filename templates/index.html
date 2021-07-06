@@ -14,6 +14,24 @@
                 width: 900px;
                 margin: auto;
             }
+        ul {
+        list-style-type: none;
+        padding: 0;
+        }
+        .aloneMemo_memo-item {
+          padding: 5px 5px;
+        }
+        .aloneMemo_memo-item-comment {
+          overflow: hidden;
+          color: blue;
+          max-height: 300px;
+          text-overflow: ellipsis;
+          white-space: normal;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;  /* 최대 라인수를 지정해줍니다.*/
+          -webkit-box-orient: vertical;
+        }
     </style>
     <title>나홀로 링크 메모장</title>
   </head>
@@ -24,32 +42,45 @@
           <p class="lead">기억해 두고싶은 링크를 저장해 두는 공간입니다.</p>
           <hr class="my-4">
           <p class="lead">
+            <!-- onclick 이벤트로 구현 리펙토링 예정 -->
+            <button id="postOnOff" class="btn btn-primary" onclick="postOpenClose()">포스팅 하기!</button>
           </p>
       </div>
-    <form id="form">
-      <div>
-        url
-        <input
-          class="form_url"
-          name="url"
-          type="text"
-          placeholder="url을 입력하세요"
-        />
-      </div>
-      <div>
-        memo
-        <input
-          class="form_memo"
-          name="memo"
-          type="text"
-          placeholder="메모를 입력하세요"
-        />
-      </div>
-      <button type="submit">저장하기</button>
-    </form>
+      <div id="post-box" class="form-post" style="display: none;">
+        <form id="form">
+          <div>
+            url
+            <input
+              class="form_url form-control"
+              name="url"
+              type="text"
+              placeholder="url을 입력하세요"
+            />
+          </div>
+          <div>
+            memo
+            <textarea
+              class="form_memo form-control"
+              name="memo"
+              type="text"
+              placeholder="메모를 입력하세요"
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">저장하기</button>
+        </form>
+    </div>
+
     <ul id="list"></ul>
 
     <script>
+      function postOpenClose() {
+        const $post = document.querySelector('#post-box')
+        if ($post.style.display == 'none') {
+          $post.style.display = 'block'
+        } else {
+          $post.style.display = 'none'
+        }
+      }
       function getMemo(){
         return fetch("/api/memo") // 기본 매소드는 GET방식.
           .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
@@ -72,14 +103,19 @@
             const list = document.querySelector("#list");
             // 각 값을 map을 통해 list.inlineHTML에 적용시킵니다.
             // { title, imgUrl, description, comment, url } 이놈들을~   => 이후 포맷으로 바꿔줍니다
+            // con-sm-4 : 12개의 간격중 4개의 구간을 가진다
             list.innerHTML = memos
               .map(
                 ({ title, imgUrl, description, comment, url }) => `
-            <li>
-                <img src="${imgUrl}" />
-                <a href="${url}">${title}</a>
-                <div>${description}</div>
-                <div>${comment}</div>
+            <li class="col-sm-4 aloneMemo_memo-item">
+              <div class="card">
+                <img class="card-img-top" src="${imgUrl}" />
+                <div class="card-body">
+                  <a class="card-title" href="${url}">${title}</a>
+                  <div class="card-text">${description}</div>
+                  <div class="aloneMemo_memo-item-comment">${comment}</div>
+                </div>
+              </div>
             </li>
             `,
               )
@@ -89,7 +125,7 @@
 
       const $form = document.querySelector("#form");
 
-      form.addEventListener("submit", function (e) {
+      $form.addEventListener("submit", function (e) {
         e.preventDefault(); //form의 기본 기능인 즉시 새로고침을 하지 못하게 하는 기능
         const url = form.querySelector(".form_url").value;
         const memo = form.querySelector(".form_memo").value;

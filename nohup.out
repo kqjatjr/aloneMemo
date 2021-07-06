@@ -1,0 +1,6 @@
+  File "app.py", line 7
+SyntaxError: Non-ASCII character '\xec' in file app.py on line 7, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+  File "app.py", line 7
+SyntaxError: Non-ASCII character '\xec' in file app.py on line 7, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+  File "app.py", line 7
+SyntaxError: Non-ASCII character '\xec' in file app.py on line 7, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
