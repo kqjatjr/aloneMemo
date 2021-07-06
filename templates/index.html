@@ -73,6 +73,7 @@
     <div class="container">
       <ul class="row rol-cols-3" id="list"></ul>
     </div>
+
     <script>
       function postOpenClose() {
         const $post = document.querySelector('#post-box')
@@ -83,79 +84,10 @@
         }
       }
       function getMemo(){
-      //   return fetch("/api/memo") // 기본 매소드는 GET방식.
-      //     .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
-      // }
-        return Promise.resolve({
-          memos: [
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment:
-                '후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다후후 네이버다'
-            },
-            {
-              imgUrl:
-                'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-              url: 'https://www.naver.com/',
-              title: '네이버',
-              description: '네이버~',
-              comment: '후후 네이버다'
-            }
-          ]
-        });
+        return fetch("/api/memo") // 기본 매소드는 GET방식.
+          .then((response) => response.json()) //실행 결과를 josn 형식으로 변환한다.
       }
+      
 
       function postMemo(data) {
         return etch('/api/memo', {
