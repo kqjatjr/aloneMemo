@@ -91,7 +91,7 @@
       
 
       function postMemo(data) {
-        return etch('/api/memo', {
+        return fetch('/api/memo', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -126,7 +126,7 @@
               .join("");
           });
       }
-
+햣
       const $form = document.querySelector("#form");
 
       form.addEventListener("submit", function (e) {
