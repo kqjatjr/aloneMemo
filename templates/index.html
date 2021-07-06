@@ -24,7 +24,7 @@
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
-    <!-- 스태틱 폴더안의 js폴더의 파일명.js 가져오기-->
+    <!-- static의 js폴더의 파일명.js 가져오기-->
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <style>
@@ -70,10 +70,9 @@
     <script>
       const aloneMemo = new AloneMemo();
 
+      // window.onload : 웹브라우저 내의 모든 요소가 준비가 되어야 실행
       window.onload = function () {
-        aloneMemo.initialize().then(() => {
-          console.log("rendered");
-        });
+        aloneMemo.initialize();
       };
     </script>
     <div class="wrap">
