@@ -18,6 +18,9 @@
         list-style-type: none;
         padding: 0;
         }
+        .aloneMemo_memo-item {
+          padding: 5px 5px;
+        }
         .aloneMemo_memo-item-comment {
           overflow: hidden;
           color: blue;
@@ -78,7 +81,7 @@
     </div>
 
     <div class="container">
-      <ul class="card-columns" id="list"></ul>
+      <ul class="row rol-cols-4 card-columns" id="list"></ul>
     </div>
 
     <script>
@@ -118,7 +121,7 @@
             list.innerHTML = memos
               .map(
                 ({ title, imgUrl, description, comment, url }) => `
-            <li class="col-sm-4 aloneMemo_memo-item card">
+            <li class="col-sm-4 aloneMemo_memo-item">
               <div class="card">
                 <img class="card-img-top" src="${imgUrl}" />
                 <div class="card-body">
