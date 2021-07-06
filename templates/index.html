@@ -32,6 +32,9 @@
           -webkit-line-clamp: 3;  /* 최대 라인수를 지정해줍니다.*/
           -webkit-box-orient: vertical;
         }
+        .memo-Add-Button{
+          margin-top: 5px;
+        }
     </style>
     <title>나홀로 링크 메모장</title>
   </head>
@@ -43,7 +46,7 @@
           <hr class="my-4">
           <p class="lead">
             <!-- onclick 이벤트로 구현 리펙토링 예정 -->
-            <button id="postOnOff" class="btn btn-primary" onclick="postOpenClose()">포스팅 하기!</button>
+            <button id="postOnOff" class="btn btn-primary memo-Add-Button" onclick="postOpenClose()">포스팅 하기!</button>
           </p>
       </div>
       <div id="post-box" class="form-post" style="display: none;">
